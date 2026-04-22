@@ -26,49 +26,69 @@ export default function Home() {
       <div className="px-6 md:px-20 py-32 space-y-32 max-w-5xl mx-auto">
 
         {/* HERO */}
-        <motion.section initial={{opacity:0,y:40}} animate={{opacity:1,y:0}}>
-          <p className="text-gray-400 mb-4">Hello, I’m</p>
+        <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+  className="relative"
+>
+  {/* Glow behind text */}
+  <div className="absolute -top-20 left-0 w-72 h-72 bg-cyan-500/20 blur-[120px] rounded-full"></div>
 
-          <h1 className="text-6xl font-bold tracking-tight">
-            Harish Nambiraj
-          </h1>
+  <p className="text-gray-400 mb-4">Hello, I’m</p>
 
-          <p className="mt-6 text-gray-400 max-w-xl">
-            I design and build intelligent systems that bridge electronics and software.
-          </p>
+  <h1 className="text-6xl md:text-7xl font-bold tracking-tight bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent">
+    Harish Nambiraj
+  </h1>
 
-          <div className="mt-8 flex gap-4">
-            <a href="/resume.pdf" className="px-6 py-3 bg-white text-black rounded-full">
-              Resume
-            </a>
-            <a href="#projects" className="px-6 py-3 border border-gray-700 rounded-full">
-              Projects
-            </a>
-          </div>
-        </motion.section>
+  <p className="mt-6 text-gray-400 max-w-xl leading-relaxed">
+    I design and build intelligent systems that bridge electronics and software — turning ideas into real-world solutions.
+  </p>
+
+  <div className="mt-10 flex gap-4">
+    <a
+      href="/resume.pdf"
+      className="px-6 py-3 bg-white text-black rounded-full font-medium hover:scale-105 transition"
+    >
+      Download Resume
+    </a>
+
+    <a
+      href="#projects"
+      className="px-6 py-3 border border-gray-700 rounded-full hover:bg-gray-800 transition"
+    >
+      View Projects
+    </a>
+  </div>
+</motion.section>
 
         {/* PROJECTS */}
-        <motion.section id="projects" initial={{opacity:0,y:40}} whileInView={{opacity:1,y:0}}>
-          <h2 className="text-3xl mb-10">Projects</h2>
+        <motion.section
+  id="projects"
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+>
+  <h2 className="text-3xl mb-10">Projects</h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
+  <div className="grid md:grid-cols-2 gap-6">
 
-            <div className="p-6 border border-neutral-800 rounded-xl hover:border-cyan-400/40 transition">
-              <h3 className="text-xl">Smart Blind Stick</h3>
-              <p className="text-gray-400 mt-2">
-                Detects obstacles and water for visually impaired users.
-              </p>
-            </div>
+    <div className="p-6 rounded-xl border border-neutral-800 bg-white/5 backdrop-blur hover:bg-white/10 hover:scale-[1.03] transition-all duration-300">
+      <h3 className="text-xl font-semibold">Smart Blind Stick</h3>
+      <p className="text-gray-400 mt-2">
+        Detects obstacles and water for visually impaired users.
+      </p>
+    </div>
 
-            <div className="p-6 border border-neutral-800 rounded-xl hover:border-cyan-400/40 transition">
-              <h3 className="text-xl">Automatic Doorbell</h3>
-              <p className="text-gray-400 mt-2">
-                Detects visitors and triggers alerts automatically.
-              </p>
-            </div>
+    <div className="p-6 rounded-xl border border-neutral-800 bg-white/5 backdrop-blur hover:bg-white/10 hover:scale-[1.03] transition-all duration-300">
+      <h3 className="text-xl font-semibold">Automatic Doorbell</h3>
+      <p className="text-gray-400 mt-2">
+        Detects visitors and triggers alerts automatically.
+      </p>
+    </div>
 
-          </div>
-        </motion.section>
+  </div>
+</motion.section>
 
         {/* ABOUT */}
         <section id="about">
