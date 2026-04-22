@@ -42,7 +42,7 @@ export default function Home() {
         </div>
       </nav>
 
-      <div className="px-6 md:px-20 py-32 space-y-32 max-w-5xl mx-auto">
+      <div className="px-4 md:px-12 py-24 space-y-12 max-w-4xl mx-auto">
 
         {/* HERO */}
         <motion.section
