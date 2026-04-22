@@ -1,12 +1,31 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const move = (e: MouseEvent) => {
+      setPos({ x: e.clientX, y: e.clientY });
+    };
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
+
   return (
     <main className="min-h-screen bg-neutral-950 text-white overflow-hidden">
 
-      {/* GLOBAL GLOW */}
+      {/* Cursor Glow (subtle, not annoying) */}
+      <div
+        className="pointer-events-none fixed w-[300px] h-[300px] rounded-full blur-[120px] bg-cyan-500/10"
+        style={{
+          transform: `translate(${pos.x - 150}px, ${pos.y - 150}px)`
+        }}
+      />
+
+      {/* Ambient glow */}
       <div className="absolute top-[-200px] left-[-200px] w-[500px] h-[500px] bg-cyan-500/20 blur-[150px] rounded-full"></div>
       <div className="absolute bottom-[-200px] right-[-200px] w-[500px] h-[500px] bg-blue-500/20 blur-[150px] rounded-full"></div>
 
@@ -30,10 +49,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative"
         >
-          <div className="absolute -top-20 left-0 w-72 h-72 bg-cyan-500/20 blur-[120px] rounded-full"></div>
-
           <p className="text-gray-400 mb-4">Hello, I’m</p>
 
           <h1 className="text-6xl md:text-7xl font-bold tracking-tight bg-gradient-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
@@ -46,10 +62,7 @@ export default function Home() {
           </p>
 
           <div className="mt-10 flex gap-4">
-            <a
-              href="/resume.pdf"
-              className="px-6 py-3 bg-white text-black rounded-full font-medium hover:scale-105 transition"
-            >
+            <a className="px-6 py-3 bg-white text-black rounded-full font-medium hover:scale-105 transition">
               Download Resume
             </a>
 
@@ -67,7 +80,6 @@ export default function Home() {
           id="projects"
           initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
         >
           <h2 className="text-3xl mb-10">Projects</h2>
 
@@ -86,10 +98,12 @@ export default function Home() {
               <motion.div
                 key={i}
                 whileHover={{ scale: 1.05 }}
-                className="p-6 rounded-xl border border-neutral-800 bg-white/5 backdrop-blur hover:bg-white/10 transition-all duration-300"
+                className="relative p-6 rounded-xl border border-neutral-800 bg-white/5 backdrop-blur transition-all duration-300 hover:bg-white/10"
               >
-                <h3 className="text-xl font-semibold">{proj.title}</h3>
-                <p className="text-gray-400 mt-2">{proj.desc}</p>
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/0 to-cyan-500/10 opacity-0 hover:opacity-100 transition"></div>
+
+                <h3 className="text-xl font-semibold relative z-10">{proj.title}</h3>
+                <p className="text-gray-400 mt-2 relative z-10">{proj.desc}</p>
               </motion.div>
             ))}
 
@@ -106,12 +120,13 @@ export default function Home() {
 
           <div className="flex flex-wrap gap-3">
             {["C", "Arduino", "Circuits", "Embedded Systems", "LTSpice"].map((skill, i) => (
-              <div
+              <motion.div
+                whileHover={{ scale: 1.1 }}
                 key={i}
                 className="px-4 py-2 border border-neutral-700 rounded-full text-sm hover:bg-white/10 transition"
               >
                 {skill}
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.section>
@@ -127,6 +142,16 @@ export default function Home() {
             I’m an Electronics and Communication Engineering student focused on building real-world systems. 
             I enjoy working with circuits, embedded tech, and solving practical engineering problems.
           </p>
+        </motion.section>
+
+        {/* CONTACT */}
+        <motion.section
+          id="contact"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+        >
+          <h2 className="text-3xl mb-6">Contact</h2>
+          <p className="text-gray-400">harishnraj26@gmail.com</p>
         </motion.section>
 
       </div>
